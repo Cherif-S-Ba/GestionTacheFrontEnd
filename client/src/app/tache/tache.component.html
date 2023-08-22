@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <h1>Liste des taches</h1>
+  <a [routerLink]="['/tache-create']" class="btn btn-success">Ajouter tache</a>
+  <table class="table table-bordered table-striped mt-3">
+    <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Date de creation</th>
+      <th scope="col">Date de realisation</th>
+      <th scope="col">Description</th>
+      <th scope="col">Utilisateur</th>
+      <th scope="col ">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tache of taches">
+      <td>{{ tache.nom }}</td>
+      <td>{{ tache.dateCreation }}</td>
+      <td>{{ tache.dateRealisation }}</td>
+      <td>{{ tache.description }}</td>
+      <td>{{ tache.utilisateur.username}}</td>
+      <td>
+        <div class="d-flex">
+          <a [routerLink]="['/tache-edit', tache.id]" class="btn btn-primary mr-2">Modifier</a>
+          <button class="btn btn-danger" type="button" (click)="openConfirmDeleteModal(content, tache.id)">Supprimer</button>
+        </div>
+      </td>
+    </tr>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmer la suppression</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer cette tache ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Supprimer</button>
+      </div>
+    </ng-template>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+

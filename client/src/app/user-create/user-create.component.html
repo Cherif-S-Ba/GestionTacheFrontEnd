@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center">Créer un compte</h3>
+          <div *ngIf="erreurMessage" class="alert alert-danger">
+            {{ erreurMessage }}
+          </div>
+          <div *ngIf="message" class="alert alert-success">
+            {{ message }}
+          </div>
+          <form (ngSubmit)="creerCompte()" #compteForm="ngForm">
+            <div class="form-group">
+              <label for="username">Nom d'utilisateur</label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" placeholder="Nom d'utilisateur" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Mot de passe</label>
+              <input type="password" class="form-control" [(ngModel)]="user.password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Mot de passe</label>
+              <input type="password" class="form-control" id="confirmPassword"  name="confirmPassword" [(ngModel)]="confirmPassword"  placeholder=" confirmer le mot de passe" required>
+            </div>
+            <div class="input-group">
+              <select class="custom-select" id="role" [(ngModel)]="role" name="role">
+                <option selected>Choose...</option>
+                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                <option value="ROLE_USER">ROLE_USER</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Select</button>
+              </div>
+            </div>
+            <div class="form-group mt-3 " >
+              <div class="d-flex">
+                <button type="submit" class="btn btn-primary" [disabled]="!compteForm.form.valid || user.password !== confirmPassword">Créer le compte</button>
+                <a style="margin-left: auto" [routerLink]="['/user-list']" class="btn btn-primary ml-8">Retour</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

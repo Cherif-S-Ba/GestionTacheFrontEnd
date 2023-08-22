@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <h1>Liste des utilisateurs</h1>
+  <a [routerLink]="['/user-create']" class="btn btn-success">Ajouter un utilisateur</a>
+  <table class="table table-bordered table-striped mt-3" style="width: 50%;">
+    <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Role</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.roles }}</td>
+      <td>
+        <div class="d-flex">
+          <a [routerLink]="['/user-edit', user.id]" class="btn btn-primary mr-2">Modifier</a>
+          <button class="btn btn-danger" type="button" (click)="openConfirmDeleteModal(content, user.id)">Supprimer</button>
+        </div>
+      </td>
+    </tr>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmer la suppression</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce utilisateur ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Supprimer</button>
+      </div>
+    </ng-template>
+    </tbody>
+  </table>
+  <div class="form-group">
+    <div class="d-flex">
+      <a style="margin-left: auto" [routerLink]="['/tache']" class="btn btn-primary ml-5">Retour</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
